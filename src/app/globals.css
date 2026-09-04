@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   RABS DESIGN SYSTEM
+   Built from the existing RABS identity: deep red / oxblood / black grounds,
+   warm gold as an accent (never a coating), ivory content surfaces.
+   ========================================================================== */
+
+@theme {
+  /* --- Ground ------------------------------------------------------------ */
+  --color-ink: #0a0909;
+  --color-charcoal: #151313;
+  --color-slate: #241f1f;
+
+  /* --- Brand reds -------------------------------------------------------- */
+  --color-oxblood: #560909;
+  --color-burgundy: #761010;
+  --color-ruby: #961616;
+  --color-ember: #b52222;
+
+  /* --- Gold accent ------------------------------------------------------- */
+  --color-champagne: #c99a3e;
+  --color-gold: #e2b64e;
+  --color-gold-soft: #f0d99a;
+  /**
+   * Champagne is a dark-ground accent: on ivory or parchment it measures about
+   * 2.4:1, which fails WCAG AA for text of any size. Bronze is the same hue
+   * family taken dark enough to clear 4.5:1 on every light surface in the
+   * system, and is what the numbered markers and light-ground icons use.
+   */
+  --color-bronze: #8a6520;
+
+  /* --- Light surfaces ---------------------------------------------------- */
+  --color-ivory: #f6f1e7;
+  --color-parchment: #fbf8f2;
+  --color-stone: #d8cfc1;
+  --color-stone-deep: #b3a897;
+
+  /* --- Text -------------------------------------------------------------- */
+  --color-body: #2a2523;
+  --color-muted: #6b625c;
+
+  /* --- Typography -------------------------------------------------------- */
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Motion ------------------------------------------------------------ */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* --- Layout ------------------------------------------------------------ */
+  --spacing-header: 5.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --rabs-bottom-bar: 0px;
+  }
+
+  * {
+    border-color: color-mix(in srgb, var(--color-stone) 60%, transparent);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--color-parchment);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    /* Room for the mobile action bar so it never covers final content. */
+    padding-bottom: var(--rabs-bottom-bar);
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, brand-coloured focus that survives dark and light grounds. */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Brand utilities
+   -------------------------------------------------------------------------- */
+
+@layer utilities {
+  /* Display lockup used for H1s and section openers. Tight, condensed, loud. */
+  .type-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -0.015em;
+  }
+
+  /* Small uppercase label above a heading — always paired with a gold rule. */
+  .type-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  /* Editorial headings: same family, far less shouty than .type-display. */
+  .type-editorial {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  /* Thin gold rule motif, derived from the logo's metallic keyline. */
+  .rule-gold {
+    background: linear-gradient(
+      90deg,
+      var(--color-champagne),
+      var(--color-gold) 45%,
+      transparent
+    );
+  }
+
+  /* Subtle woven texture — a nod to carpet/textile without being literal. */
+  .texture-weave {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, white 3%, transparent) 0 1px,
+        transparent 1px 4px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        color-mix(in srgb, black 4%, transparent) 0 1px,
+        transparent 1px 4px
+      );
+  }
+
+  /* Photographic scrim: keeps overlaid copy readable without greying the shot. */
+  .scrim-hero {
+    background: linear-gradient(
+      100deg,
+      var(--color-ink) 0%,
+      color-mix(in srgb, var(--color-ink) 88%, transparent) 34%,
+      color-mix(in srgb, var(--color-ink) 40%, transparent) 62%,
+      color-mix(in srgb, var(--color-ink) 15%, transparent) 100%
+    );
+  }
+
+  .scrim-card {
+    background: linear-gradient(
+      to top,
+      color-mix(in srgb, var(--color-ink) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-ink) 55%, transparent) 42%,
+      transparent 78%
+    );
+  }
+
+  /* The promotional diagonal edge lifted from RABS offer graphics. */
+  .edge-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), 0 100%);
+  }
+
+  .balance {
+    text-wrap: balance;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Component-level primitives
+   -------------------------------------------------------------------------- */
+
+@layer components {
+  /* Hover crop used across category / project / offer cards. */
+  .media-zoom img,
+  .media-zoom [data-media-fill] {
+    transition: transform 900ms var(--ease-brand);
+  }
+
+  .media-zoom:hover img,
+  .media-zoom:hover [data-media-fill] {
+    transform: scale(1.055);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .media-zoom:hover img,
+    .media-zoom:hover [data-media-fill] {
+      transform: none;
+    }
+  }
+}
+
+/* Hide scrollbars on the mobile rails without disabling scrolling. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
