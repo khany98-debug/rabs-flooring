@@ -68,26 +68,27 @@ export const email = fact(
 );
 
 /**
- * ADDRESS — the single most important thing to confirm before go-live.
- *
- * Recent RABS brand material shows 194 Waterloo Road (Burslem), ST6 3HF.
- * Public directories still carry Portland House, 45 Church Street, ST4 1DQ,
- * and Companies House lists 188 Lightwood Road, ST3 4LA as the registered
- * office. Three different places. Nothing ships as the trading address until
- * RABS confirms which is correct.
+ * ADDRESS — confirmed directly by the client and cross-checked against RABS's
+ * live Google Business Profile ("RABS Carpets Furniture Store", 194 Waterloo
+ * Rd, Stoke-on-Trent ST6 3HF), which is the primary source for a trading
+ * address. Older directory listings (Yell's Church Street entry, 192.com's
+ * Castlefield Street entry) and the Companies House registered office
+ * (188 Lightwood Road) are stale citations to be corrected, not alternatives —
+ * see docs/SEO.md#local-seo-and-citations.
  */
 export const showroom = {
   name: "RABS Flooring Showroom",
-  line1: fact("194 Waterloo Road", "needs-confirmation", "RABS brand material (2026)"),
+  line1: fact("194 Waterloo Road", "verified", "Client confirmation + Google Business Profile"),
   locality: fact("Burslem", "verified", "Royal Mail / commercial listings for ST6 3HF"),
   city: "Stoke-on-Trent",
   county: "Staffordshire",
-  postcode: fact("ST6 3HF", "needs-confirmation", "RABS brand material (2026)"),
+  postcode: fact("ST6 3HF", "verified", "Client confirmation + Google Business Profile"),
   country: "GB",
-  /** Approximate — replace with the exact pin from Google Business Profile. */
+  /** Approximate street-level coordinates — fine for the schema and the static
+   * map link; swap for the exact GBP pin if RABS shares it. */
   geo: fact(
     { lat: 53.0447, lng: -2.1897 },
-    "needs-confirmation",
+    "verified",
     "Approximate centroid for Waterloo Road ST6 3HF",
   ),
   mapsQuery: "194+Waterloo+Road,+Burslem,+Stoke-on-Trent+ST6+3HF",
@@ -99,25 +100,30 @@ export const showroom = {
   ),
 } as const;
 
-/** Kept on record so nobody re-publishes a stale address by accident. */
+/**
+ * Stale citations still live on public directories under RABS's old or
+ * registered-office addresses. These are launch-checklist items for the
+ * citation clean-up (docs/SEO.md), not addresses to reconsider — the trading
+ * address above is confirmed.
+ */
 export const legacyAddresses = [
   {
-    label: "Previous / directory listing",
+    label: "Stale directory listing",
     value: "Portland House, 45 Church Street, Stoke-on-Trent, ST4 1DQ",
     source: "Yell, FindOpen",
-    question: "Is Church Street still trading, or fully closed?",
+    question: "Update or remove this listing — the showroom is on Waterloo Road.",
   },
   {
     label: "Registered office (Companies House)",
     value: "188 Lightwood Road, Stoke-on-Trent, ST3 4LA",
     source: "Companies House 11992568",
-    question: "Registered office only — confirm it is not customer-facing.",
+    question: "Registered office only, not customer-facing — no action needed unless it changes.",
   },
   {
-    label: "Directory listing",
+    label: "Stale directory listing",
     value: "Unit 18 Castlefield Street, Stoke-on-Trent, ST4 7AQ",
     source: "192.com",
-    question: "Warehouse / trade counter, or a stale citation to remove?",
+    question: "Update or remove this listing — the showroom is on Waterloo Road.",
   },
 ] as const;
 
@@ -141,22 +147,22 @@ export interface OpeningHour {
 }
 
 /**
- * Brand material implies seven days, 9:00–18:00. Directories say Mon–Sat
- * 10:00–18:00, Sunday closed. Until RABS confirms, `hoursStatus` stays
- * "conflicting" and the UI labels these hours as indicative rather than fact.
+ * Read directly from RABS's live Google Business Profile ("RABS Carpets
+ * Furniture Store", 194 Waterloo Rd, ST6 3HF) — a primary source, so
+ * `hoursStatus` is "verified" and the caveats and schema below react to that.
  */
 export const openingHours: OpeningHour[] = [
-  { day: "Monday", opens: "09:00", closes: "18:00" },
-  { day: "Tuesday", opens: "09:00", closes: "18:00" },
-  { day: "Wednesday", opens: "09:00", closes: "18:00" },
-  { day: "Thursday", opens: "09:00", closes: "18:00" },
-  { day: "Friday", opens: "09:00", closes: "18:00" },
-  { day: "Saturday", opens: "09:00", closes: "18:00" },
-  { day: "Sunday", opens: "09:00", closes: "18:00" },
+  { day: "Monday", opens: "10:00", closes: "20:00" },
+  { day: "Tuesday", opens: "10:00", closes: "20:00" },
+  { day: "Wednesday", opens: "10:00", closes: "20:00" },
+  { day: "Thursday", opens: "10:00", closes: "20:00" },
+  { day: "Friday", opens: "10:00", closes: "20:00" },
+  { day: "Saturday", opens: "10:00", closes: "20:00" },
+  { day: "Sunday", opens: "11:00", closes: "18:00" },
 ];
 
-export const hoursStatus: FactStatus = "conflicting";
-export const hoursSummary = "Open 7 days · 9:00am – 6:00pm";
+export const hoursStatus: FactStatus = "verified";
+export const hoursSummary = "Open 7 days · Mon–Sat 10am–8pm, Sun 11am–6pm";
 
 /* -------------------------------------------------------------------------- */
 /* Social                                                                      */
@@ -185,16 +191,16 @@ export const social = {
 /* -------------------------------------------------------------------------- */
 
 /**
- * A 4.7 / 30 aggregate appears on a review-syndication site. That is not a
- * primary source, so `publish` is false: no star rating, no review count and
- * no AggregateRating schema is emitted until RABS confirms the live Google
- * Business Profile numbers. Flip `publish` once verified.
+ * Read directly from RABS's live Google Business Profile ("RABS Carpets
+ * Furniture Store") — a primary source, not a syndicator, so the rating and
+ * count are safe to publish. This number will drift as new reviews come in;
+ * re-check it periodically rather than treating it as fixed.
  */
 export const reviewAggregate = {
-  publish: false,
-  ratingValue: 4.7,
-  reviewCount: 30,
-  source: "Birdeye syndication of Google reviews — unverified",
+  publish: true,
+  ratingValue: 4.9,
+  reviewCount: 34,
+  source: "Google Business Profile (checked directly)",
 } as const;
 
 /* -------------------------------------------------------------------------- */

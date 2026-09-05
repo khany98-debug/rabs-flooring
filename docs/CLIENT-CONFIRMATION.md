@@ -11,50 +11,51 @@ Work through this list with RABS and the site is ready to launch.
 
 ---
 
-## 1. CRITICAL — the trading address
+## 1. RESOLVED — the trading address
 
-**Three different addresses are currently published about RABS.**
+**Confirmed by the client and cross-checked against RABS's live Google
+Business Profile** ("RABS Carpets Furniture Store"), which is a primary source
+for a trading address:
 
-| Source | Address |
-|---|---|
-| Recent RABS brand material (2026) | 194 Waterloo Road, Burslem, Stoke-on-Trent, **ST6 3HF** |
-| Yell / FindOpen directory listings | Portland House, 45 Church Street, Stoke-on-Trent, **ST4 1DQ** |
-| Companies House (registered office) | 188 Lightwood Road, Stoke-on-Trent, **ST3 4LA** |
-| 192.com | Unit 18 Castlefield Street, Stoke-on-Trent, **ST4 7AQ** |
+> **194 Waterloo Road, Burslem, Stoke-on-Trent, ST6 3HF**
 
-The site currently uses 194 Waterloo Road, and every reference to it comes from
-one place (`src/content/site.ts`) so it can be corrected in seconds.
+`hoursStatus`-adjacent flags are cleared; `showroom.line1` and
+`showroom.postcode` are now `"verified"` in `src/content/site.ts`, and
+`openingHoursSpecification` is emitted in structured data (see section 2).
 
-**Confirm:**
+Three other addresses still circulate publicly and are **stale citations to
+correct, not alternatives to weigh up**:
 
-1. Which address is the customer-facing showroom?
-2. Is Church Street still trading, closed, or something else (warehouse, second site)?
-3. Is Lightwood Road purely the registered office?
-4. What is Castlefield Street — a stale citation to be removed?
-5. Exact postcode, and the exact Google Business Profile pin (for the map and schema).
+| Source | Address | What it actually is |
+|---|---|---|
+| Yell / FindOpen | Portland House, 45 Church Street, ST4 1DQ | Old listing — update or remove |
+| Companies House (registered office) | 188 Lightwood Road, ST3 4LA | Registered office only, not customer-facing — no action needed unless it changes |
+| 192.com | Unit 18 Castlefield Street, ST4 7AQ | Old listing — update or remove |
 
-**Why this matters more than anything else on the list:** inconsistent name,
-address and phone across the web is the fastest way to damage local search
-rankings, and sending a customer to a closed shop is the worst experience the
-site can produce. This also drives the citation clean-up in
-[SEO.md](./SEO.md#local-seo-and-citations).
+**Remaining task:** correct the Yell and 192.com listings to Waterloo Road. See
+the citation clean-up in [SEO.md](./SEO.md#local-seo-and-citations).
+
+The approximate map coordinates in `showroom.geo` are close enough for the
+static map link and schema; swap in the exact Google Business Profile pin if
+RABS can share it.
 
 ---
 
-## 2. CRITICAL — opening hours
+## 2. RESOLVED — opening hours
 
-Brand material implies **seven days, 9:00am–6:00pm**. Directories say
-**Mon–Sat 10:00–18:00, closed Sunday**.
+**Read directly from RABS's live Google Business Profile:**
 
-The site currently shows seven days 9–6, but flagged: every hours display
-carries "please call before travelling", and **no `openingHoursSpecification`
-is emitted in structured data** until this is settled — publishing wrong hours
-to Google is worse than publishing none.
+| Day | Hours |
+|---|---|
+| Monday – Saturday | 10:00am – 8:00pm |
+| Sunday | 11:00am – 6:00pm |
 
-**Confirm:** the real hours, including bank holidays and any seasonal change.
+`hoursStatus` is now `"verified"` in `src/content/site.ts`. The "please call to
+confirm" caveats have been removed from the site, and
+`openingHoursSpecification` is now included in the structured data.
 
-Once confirmed, set `hoursStatus = "verified"` in `src/content/site.ts` and the
-caveats disappear and the schema switches on automatically.
+**Still worth confirming with RABS directly:** any seasonal change or bank
+holiday variation, since a public listing does not always reflect those.
 
 ---
 
@@ -70,23 +71,35 @@ The email is only published in schema once `email.status` is set to `"verified"`
 
 ---
 
-## 4. Reviews and ratings
+## 4. PARTIALLY RESOLVED — reviews and ratings
 
-A **4.7 average across roughly 30 reviews** appears on a review-syndication
-site. That is not a primary source, so:
+**The aggregate rating is now live on the site**, read directly from RABS's
+Google Business Profile (a primary source, not a syndicator):
 
-- no star rating appears anywhere on the site,
-- no review count appears anywhere,
-- no `AggregateRating` structured data is emitted,
-- the reviews page shows an honest "we're gathering these" state.
+> **4.9 average from 34 reviews**
 
-**To publish reviews:**
+`reviewAggregate.publish` is `true` in `src/content/site.ts`, so the star
+rating appears on the homepage and reviews page, and `AggregateRating`
+structured data is emitted. This number will drift as new reviews come in —
+worth a periodic re-check rather than treating it as fixed.
 
-1. Export the reviews from the Google Business Profile.
+**Individual review text is still not published**, and that part of the task
+is unchanged:
+
+- no individual reviews appear on the site yet,
+- no `Review` structured data is emitted,
+- the reviews page shows the honest "we're gathering these" state below the
+  now-live star rating.
+
+**To publish individual reviews:**
+
+1. Export them from the Google Business Profile.
 2. Paste each one **verbatim** into `src/content/reviews.ts` with reviewer name,
    date, source and a link back to the original.
-3. Confirm the live average and count, then set
-   `reviewAggregate.publish = true` in `src/content/site.ts`.
+
+We did not paste review text in from the Maps listing itself, because the
+business owner should choose which ones go up and confirm the wording is
+copied exactly.
 
 We have not written a single testimonial. Inventing them is both a
 consumer-protection problem and, in a city this size, likely to be noticed.

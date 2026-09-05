@@ -188,11 +188,13 @@ reaching for anything cleverer.
 ## Launch checklist
 
 ### Content
-- [ ] Trading address confirmed and updated
-- [ ] Opening hours confirmed; `hoursStatus` set to `"verified"`
-- [ ] Phone, email and WhatsApp confirmed
+- [x] Trading address confirmed (194 Waterloo Road, Burslem, ST6 3HF)
+- [x] Opening hours confirmed from Google Business Profile; `hoursStatus` is `"verified"`
+- [x] Review aggregate confirmed from Google Business Profile (4.9 / 34); `reviewAggregate.publish` is `true`
+- [ ] Stale directory citations (Yell, 192.com) updated to Waterloo Road
+- [ ] Phone, email and WhatsApp confirmed as monitored
 - [ ] Real prices added to offers, or offers removed
-- [ ] Real reviews added; `reviewAggregate.publish` set
+- [ ] Individual reviews added verbatim to `src/content/reviews.ts`
 - [ ] Real projects added; example projects deleted
 - [ ] Delivery, returns, warranty and terms written by RABS
 - [ ] Logo and showroom photography supplied

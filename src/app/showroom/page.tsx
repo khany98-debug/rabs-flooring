@@ -295,16 +295,18 @@ export default function ShowroomPage() {
         </Container>
       </Section>
 
-      {/* Address conflict notice — pitch build only */}
+      {/* Citation clean-up notice — pitch build only. The trading address and
+          hours are confirmed; what remains is correcting the stale listings
+          that still point elsewhere. */}
       {PITCH_MODE && (
         <Section tone="ivory" padded={false}>
           <Container>
-            <div className="my-12 border-l-2 border-ember bg-white p-6 sm:p-8">
-              <p className="type-eyebrow mb-3 text-ember">Needs confirming before launch</p>
+            <div className="my-12 border-l-2 border-champagne bg-white p-6 sm:p-8">
+              <p className="type-eyebrow mb-3 text-bronze">Before launch: clean up these citations</p>
               <p className="text-sm leading-relaxed text-body">
-                Public listings for RABS currently show more than one address. The trading address,
-                postcode and opening hours all need confirming, and the stale citations need
-                correcting, before this page goes live.
+                The Waterloo Road address and the hours above are confirmed against RABS&rsquo;s own
+                Google Business Profile. A few older public listings still show a different address
+                and need updating or removing so every citation matches.
               </p>
               <ul className="mt-5 space-y-3 text-sm">
                 {legacyAddresses.map((a) => (
