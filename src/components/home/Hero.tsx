@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Layout";
 import { PhoneLink } from "@/components/layout/ContactLinks";
 import { phone } from "@/content/site";
+import { PITCH_MODE } from "@/content/pitch";
 
 /**
  * Homepage hero.
@@ -32,7 +33,11 @@ export function Hero() {
         <div className="absolute inset-0 lg:relative lg:order-2 lg:inset-auto">
           <Media
             slot="showroom/hero"
-            alt="The RABS Flooring showroom in Stoke-on-Trent"
+            alt={
+              PITCH_MODE
+                ? "AI-generated concept interior for the RABS Flooring website proposal"
+                : "The RABS Flooring showroom in Stoke-on-Trent"
+            }
             priority
             sizes="(max-width: 1024px) 100vw, 56vw"
             hint="Showroom exterior — wide shot"

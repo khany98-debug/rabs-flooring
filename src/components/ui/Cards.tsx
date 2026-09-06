@@ -59,7 +59,11 @@ export function CategoryCard({
       <div className={cn("relative w-full", tall ? "aspect-[3/4]" : "aspect-[4/5] sm:aspect-square")}>
         <Media
           slot={image}
-          alt={`${name} at the RABS Flooring showroom`}
+          alt={
+            PITCH_MODE
+              ? `AI-generated concept image of ${name} for the RABS Flooring proposal`
+              : `${name} at the RABS Flooring showroom`
+          }
           sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
           priority={priority}
         />
@@ -108,7 +112,7 @@ export function ProjectCard({
       <div className="relative aspect-[4/3] w-full">
         <Media
           slot={`projects/${project.images[0]}`}
-          alt={project.title}
+          alt={project.isExample ? `${project.title} — concept layout image` : project.title}
           sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 30vw"
           priority={priority}
           hint="Installation photo"

@@ -13,9 +13,10 @@ import manifest from "./media-manifest.json";
  * from /public/media before each dev run and build, and returns the file if one
  * exists. If not, <Media> renders a branded plate instead of a broken image.
  *
- * The practical effect: RABS drops their photos into /public/media using the
- * filenames in docs/ASSETS.md, and the entire site becomes real with no code
- * changes. Nothing is ever silently replaced with stock or AI imagery.
+ * The practical effect: RABS drops approved photos into /public/media using
+ * the filenames in docs/ASSETS.md, and the entire site becomes real with no
+ * code changes. Pitch-only concept imagery is supplied explicitly and is
+ * disclosed by the pitch banner; it must be replaced before launch.
  *
  * The manifest is a plain JSON import rather than a filesystem scan because
  * this runs inside client components too (the header renders the Logo), and

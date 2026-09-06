@@ -148,7 +148,7 @@ export default async function ProjectPage({ params }: Params) {
                     <SampleTag />
                     <Media
                       slot={`projects/${image}`}
-                      alt={`${project.title} — photo ${i + 1}`}
+                      alt={`${project.title} — ${project.isExample ? "concept image" : `photo ${i + 1}`}`}
                       sizes="(max-width: 640px) 46vw, 24vw"
                       hint="Project photo"
                     />

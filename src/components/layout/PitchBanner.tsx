@@ -23,8 +23,9 @@ export function PitchBanner() {
         <p className="flex-1 text-[11px] leading-relaxed sm:text-xs">
           <span className="font-bold uppercase tracking-[0.14em]">Concept build</span>
           <span className="mx-2 opacity-40">|</span>
-          Not indexed by search engines. Address, opening hours, prices, offers and reviews are all
-          awaiting confirmation from RABS — see{" "}
+          Not indexed by search engines. The interior visuals are AI-generated concept imagery for
+          this proposal, not RABS photography or completed customer work. Address, opening hours,
+          prices, offers and reviews are all awaiting confirmation from RABS — see{" "}
           <code className="bg-ink/10 px-1">docs/CLIENT-CONFIRMATION.md</code>. Sections marked
           &ldquo;Layout example&rdquo; are structural placeholders, not real RABS work.
         </p>

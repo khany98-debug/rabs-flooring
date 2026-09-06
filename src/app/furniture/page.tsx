@@ -11,6 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 import { jsonLd, breadcrumbSchema } from "@/lib/schema";
 import { PhoneLink } from "@/components/layout/ContactLinks";
 import { phone } from "@/content/site";
+import { PITCH_MODE } from "@/content/pitch";
 
 export const metadata: Metadata = buildMetadata({
   title: "Furniture in Stoke-on-Trent | Sofas, Beds & Dining | RABS",
@@ -91,7 +92,11 @@ export default function FurnitureHubPage() {
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-charcoal">
                 <Media
                   slot="furniture/showroom-sofas"
-                  alt="Sofas on display in the RABS showroom"
+                    alt={
+                      PITCH_MODE
+                        ? "AI-generated concept sofa vignette for the RABS Flooring proposal"
+                        : "Sofas on display in the RABS showroom"
+                    }
                   sizes="(max-width: 1024px) 100vw, 46vw"
                   hint="Sofa display"
                 />

@@ -8,6 +8,7 @@ import { CategoryCard } from "@/components/ui/Cards";
 import { jsonLd, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import type { Category } from "@/content/categories";
 import { cn } from "@/lib/utils";
+import { PITCH_MODE } from "@/content/pitch";
 
 /**
  * The shared skeleton behind every category page — but the *content* is
@@ -174,7 +175,11 @@ export function CategoryPage({
               <div className="relative aspect-[3/2] w-full overflow-hidden bg-ink">
                 <Media
                   slot="showroom/interior-wide"
-                  alt="Inside the RABS Flooring showroom"
+                  alt={
+                    PITCH_MODE
+                      ? "AI-generated concept showroom interior for the RABS Flooring proposal"
+                      : "Inside the RABS Flooring showroom"
+                  }
                   sizes="(max-width: 1024px) 100vw, 46vw"
                   hint="Showroom interior"
                 />

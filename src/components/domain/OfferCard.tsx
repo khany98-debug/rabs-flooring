@@ -2,6 +2,7 @@ import { Media } from "@/components/ui/Media";
 import { Button } from "@/components/ui/Button";
 import { formatPrice, cn } from "@/lib/utils";
 import { hasRealPrice, type Offer } from "@/content/offers";
+import { PITCH_MODE } from "@/content/pitch";
 
 /**
  * Offer card.
@@ -44,7 +45,7 @@ export function OfferCard({
       >
         <Media
           slot={`offers/${offer.image}`}
-          alt={offer.title}
+          alt={PITCH_MODE ? `AI-generated concept image for ${offer.title}` : offer.title}
           sizes={featured ? "(max-width: 1024px) 100vw, 52vw" : "(max-width: 640px) 100vw, 31vw"}
           hint="Offer image"
         />

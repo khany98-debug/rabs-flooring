@@ -2,6 +2,7 @@ import { Media } from "@/components/ui/Media";
 import { Button } from "@/components/ui/Button";
 import { Section, Container, SectionHeading } from "@/components/ui/Layout";
 import { Reveal } from "@/components/ui/Reveal";
+import { PITCH_MODE } from "@/content/pitch";
 
 /**
  * "One team. Your whole home."
@@ -48,7 +49,11 @@ export function WholeHome() {
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-ink sm:aspect-[3/2] lg:aspect-[4/5]">
               <Media
                 slot="projects/whole-house-after"
-                alt="A whole-house flooring and furniture project by RABS"
+                alt={
+                  PITCH_MODE
+                    ? "AI-generated concept interior for a whole-home RABS proposal"
+                    : "A whole-house flooring and furniture project by RABS"
+                }
                 sizes="(max-width: 1024px) 100vw, 46vw"
                 hint="Finished room — whole house job"
               />

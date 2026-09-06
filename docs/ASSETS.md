@@ -5,8 +5,10 @@ Drop a file into `public/media/` with the matching name and it appears on the
 site automatically — no code changes, no redeploy configuration.
 
 Until a file exists, that slot renders a branded plate (oxblood gradient, gold
-keyline, house motif) rather than a broken image. That is why the pitch build
-looks finished despite having no photography in it.
+keyline, house motif) rather than a broken image. The current pitch build also
+contains a small set of clearly disclosed AI-generated concept visuals to make
+the proposal easier to review; they are not RABS photography or proof of a
+completed customer job.
 
 ## Why we could not fetch these ourselves
 
@@ -15,10 +17,9 @@ photography on Instagram. It could not be downloaded programmatically —
 Instagram blocks automated access, and hotlinking their CDN is not an option
 because those URLs rotate and would leave dead images across the site.
 
-We have deliberately **not** substituted stock photography or AI-generated
-rooms. A flooring customer in Stoke recognises a stock photo instantly, and
-passing off a generated interior as a RABS installation is not something we are
-prepared to do.
+RABS should replace the concept visuals with approved showroom, product and
+installation photography before launch. A generated interior must never be
+presented as a RABS installation, a specific product, or a customer result.
 
 ## How to supply them
 
